@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PotentialForAfrica.Data;
 using PotentialForAfrica.Exception;
+using PotentialForAfrica.Interfaces;
 using PotentialForAfrica.Models;
-using PotentialForAfrica.Repositories.Interfaces;
 
 namespace PotentialForAfrica.Repositories
 {

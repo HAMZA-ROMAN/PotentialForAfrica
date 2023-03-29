@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.InteropServices;
 
 namespace PotentialForAfrica.Models
 {
@@ -37,9 +38,6 @@ namespace PotentialForAfrica.Models
         [StringLength(100)]
         [DisplayName("Dernier employeur")]
         public string DernierEmployeur { get; set; }
-        [Required]
-        [StringLength(100)]
-        [DisplayName("CV")]
-        public string NomCV { get; set; }
+        public string? NomCV { get; set; }
     }
 }

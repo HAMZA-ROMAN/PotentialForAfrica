@@ -1,8 +1,12 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using PotentialForAfrica.Data;
+using PotentialForAfrica.Helpers;
+using PotentialForAfrica.Interfaces;
 using PotentialForAfrica.Repositories;
-using PotentialForAfrica.Repositories.Interfaces;
+using PotentialForAfrica.Services;
+using IEmailSender = PotentialForAfrica.Interfaces.IEmailSender;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,8 +22,15 @@ builder.Host.ConfigureLogging(logging =>
 });
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
+var emailConfig = builder.Configuration
+        .GetSection("EmailConfiguration")
+        .Get<EmailConfiguration>();
+builder.Services.AddSingleton(emailConfig);
+builder.Services.AddScoped<IEmailSender, MailSenderService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICandidatRepository,CandidatRpository>();
+builder.Services.AddScoped<ICandidatService, CandidatService>();
+
 
 
 var app = builder.Build();

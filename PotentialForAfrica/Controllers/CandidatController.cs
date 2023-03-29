@@ -6,24 +6,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PotentialForAfrica.Data;
+using PotentialForAfrica.Interfaces;
 using PotentialForAfrica.Models;
-using PotentialForAfrica.Repositories.Interfaces;
 
 namespace PotentialForAfrica.Controllers
 {
     public class CandidatController : Controller
     {
-        private readonly ICandidatRepository mCandidatRepository;
+        private readonly ICandidatService mCandidatService;
 
-        public CandidatController(ICandidatRepository pCandidatRepository)
+        public CandidatController(ICandidatService pCandidatService)
         {
-            mCandidatRepository = pCandidatRepository;
+            mCandidatService = pCandidatService;
         }
 
        // GET: Candidat
         public async Task<IActionResult> Index()
         {
-            return View(await mCandidatRepository.RecupererCandidatsAsync());
+            return View(await mCandidatService.RecupererCandidatsAsync());
         }
 
       //  GET: Candidat/Details/5
@@ -55,11 +55,16 @@ namespace PotentialForAfrica.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CandidatModel candidatModel)
+        public async Task<IActionResult> Create(CandidatModel candidatModel,IFormFile FileCV)
         {
             if (ModelState.IsValid)
             {
-                await mCandidatRepository.AjouterCandidat(candidatModel);
+                if( !(await mCandidatService.UploadCV(FileCV, $"{candidatModel.Nom}_{candidatModel.Prenom}")))
+                {
+                    ViewBag.message = "upload de CV est echoué,essayez de nouveau";
+                    return View(candidatModel);
+                }
+                await mCandidatService.AjouterCandidat(candidatModel);
                 return RedirectToAction(nameof(Index));
             }
             return View(candidatModel);
