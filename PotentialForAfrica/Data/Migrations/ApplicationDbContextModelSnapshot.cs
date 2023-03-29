@@ -232,6 +232,9 @@ namespace PotentialForAfrica.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CandidatId"), 1L, 1);
 
+                    b.Property<string>("CVPath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DernierEmployeur")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -251,11 +254,6 @@ namespace PotentialForAfrica.Data.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Nom")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("NomCV")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");

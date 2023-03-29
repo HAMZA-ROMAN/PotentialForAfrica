@@ -38,6 +38,6 @@ namespace PotentialForAfrica.Models
         [StringLength(100)]
         [DisplayName("Dernier employeur")]
         public string DernierEmployeur { get; set; }
-        public string? NomCV { get; set; }
+        public string? CVPath { get; set; }
     }
 }

@@ -20,7 +20,8 @@ builder.Host.ConfigureLogging(logging =>
     logging.ClearProviders();
     logging.AddConsole();
 });
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity < IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 var emailConfig = builder.Configuration
         .GetSection("EmailConfiguration")
@@ -30,10 +31,8 @@ builder.Services.AddScoped<IEmailSender, MailSenderService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICandidatRepository,CandidatRpository>();
 builder.Services.AddScoped<ICandidatService, CandidatService>();
-
-
-
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -57,7 +56,8 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Candidat}/{action=Index}/{id?}");
+    pattern: "{controller=Candidat}/{action=Create}");
 app.MapRazorPages();
 
 app.Run();
+

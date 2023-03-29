@@ -48,5 +48,36 @@ namespace PotentialForAfrica.Repositories
                 throw new CandidatException($"Erreur dans la récupération des candidatures {Excep.Message}", innerException: Excep.InnerException);
             }
         }
+        public async Task<CandidatModel> RecupererCandidatsAsyncById(int CandidatId)
+        {
+            try
+            {
+                _logger.LogTrace($"Début de la récupération de candidature ID = {CandidatId}");
+                 CandidatModel candidat = await _context.Candidats.FirstOrDefaultAsync(c =>c.CandidatId ==CandidatId);
+                _logger.LogTrace($"Fin de la récupération");
+                return candidat;
+            }
+            catch (IOException Excep)
+            {
+                throw new CandidatException($"Erreur dans la récupération des candidatures {Excep.Message}", innerException: Excep.InnerException);
+            }
+        }
+
+        public async Task<bool> RemoveCandidatsAsync(CandidatModel Candidat)
+        {
+            try
+            {
+                _logger.LogTrace($"Début de la suppression de candidature ID = {Candidat.CandidatId}");
+                _context.Candidats.Remove(Candidat);
+                await _context.SaveChangesAsync();
+                _logger.LogTrace($"Fin de la suppression de candidature ID = {Candidat.CandidatId}");
+
+                return true;
+            }
+            catch (System.Exception Excep)
+            {
+                throw new CandidatException($"Erreur dans la suppression  dcandidature ID= {Candidat.CandidatId}, {Excep.Message}", innerException: Excep.InnerException);
+            }
+        }
     }
 }

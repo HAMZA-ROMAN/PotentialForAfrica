@@ -4,12 +4,15 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@ViewBag.message</strong>
+    </div>
+}
+<h1>Liste des candidatures</h1>
+<table class="table" id="mytable">
     <thead>
         <tr>
             <th>
@@ -34,44 +37,58 @@
                 @Html.DisplayNameFor(model => model.DernierEmployeur)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NomCV)
+               CV
             </th>
-            <th></th>
+            <th>
+
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prenom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telehone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NiveauEtude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NbreAnneeExperience)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DernierEmployeur)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomCV)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CandidatId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CandidatId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CandidatId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prenom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telehone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NiveauEtude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NbreAnneeExperience)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DernierEmployeur)
+                </td>
+                <td>
+                    <a href="~/@item.CVPath" target="_blank"> cv2</a>
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.CandidatId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            $('#mytable').DataTable();
+        });
+
+    </script>
+
+}
