@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "MT+NKvpbGwWzpPX5DHVZFHqk+90MEr+ZSSriYRGDDOk=",
+  "Hash": "+XuAQzrqqtRmFtm5iCwzDqdKuA0Pz2kcqasEU7sKd1k=",
   "Source": "PotentialForAfrica",
   "BasePath": "_content/PotentialForAfrica",
   "Mode": "Default",
@@ -2871,23 +2871,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
-    },
-    {
-      "Identity": "C:\\Users\\hamza\\OneDrive\\Documents\\PotentialForAfrica\\PotentialForAfrica\\wwwroot\\UploadedCV\\hamza_roman\\Hamza_Roman_Resume_F_V.pdf",
-      "SourceId": "PotentialForAfrica",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\hamza\\OneDrive\\Documents\\PotentialForAfrica\\PotentialForAfrica\\wwwroot\\",
-      "BasePath": "_content/PotentialForAfrica",
-      "RelativePath": "UploadedCV/hamza_roman/Hamza_Roman_Resume_F_V.pdf",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\UploadedCV\\hamza_roman\\Hamza_Roman_Resume_F_V.pdf"
     }
   ]
 }

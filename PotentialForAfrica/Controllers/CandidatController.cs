@@ -64,6 +64,7 @@ namespace PotentialForAfrica.Controllers
         }
 
         // GET: Candidat/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var candidatModel = await mCandidatService.RecupererCandidatsAsyncById(id);
@@ -75,6 +76,7 @@ namespace PotentialForAfrica.Controllers
         }
 
         // POST: Candidat/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int CandidatId)
